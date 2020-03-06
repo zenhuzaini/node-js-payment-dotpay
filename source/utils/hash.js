@@ -5,6 +5,4 @@ const hashit = (params) => {
     return hash256(data).toString()
 }
 
-console.log(hashit('cinta'))
-
 module.exports = hashit
