@@ -1,0 +1,66 @@
+<html>
+<!-----------------------------
+
+	Górna część strony
+
+------------------------------------->
+
+<script type="text/javascript" src="http://code.jquery.com/jquery-3.3.1.min.js"></script>
+
+<script>
+  $(document).ready(function () {
+         $("#buttomDarowizna").click(function () {
+             if($('#kwota').val().trim() === '') {
+                 $("#kwota_alert").text("Proszę wybrać lub wprowadzić kwotę darowizny.").show();
+                 $('#kwota_alert').css( "display", "inline" ).fadeOut( 5000 );
+                 return false;
+             }
+         });
+      });
+</script>
+
+{{!-- https://ssl.dotpay.pl/t2 --}}
+<div align="center">
+  <form action="https://ssl.dotpay.pl/t2/" method="POST" target="_parent">
+    <p style="font-size: 18px">Wybierz kwotę darowizny</p>
+    <p>
+      <input type="button" onClick="$('#kwota').val('10'); $('#kwota').prop('disabled', true);" value="10.00 zł" />
+      <input type="button" onClick="$('#kwota').val('20'); $('#kwota').prop('disabled', true);" value="20.00 zł" />
+      <input type="button" onClick="$('#kwota').val('50'); $('#kwota').prop('disabled', true);" value="50.00 zł" />
+      <input type="hidden" name="type" value="0" />
+      <input type="hidden" name="currency" value="PLN" />
+
+      <table>
+        <tr>
+          <td><input type="button" onClick="$('#kwota').prop('disabled', false);" value="Inna kwota" /></td>
+          <td>Kwota:<br /><input type="text" name="amount" id="kwota" size="5" disabled="disabled" pattern="^([1-9])((\.\d{1,2})?)$|^((?!0)(\d){1,5})((\.\d{1,2})?)$|^(1(\d{5})(.\d{1,2})?)$|^(200000(.[0]{1,2})?)$" placeholder="np. 100" maxlength="9"
+              size="9" title="Kwota powinna zawierać się w przedziale 1 - 200000 PLN. Dozwolony format to np: 100 lub 152.43" /></td>
+        </tr>
+      </table>
+
+      <!--------------------------------- KONFIGURACJA --------------------------------------->
+
+      <!---- zamiast 000000 nalezy podstawic numer ID w Dotpay -->
+      <input type="hidden" name="id" value="CJqaCDxhztHIBvP8Wm0HdYKc04Ug4rRN" />
+      <!--- Tytuł transakcji --->
+      <input type="hidden" name="description" value="Testowa płatność" />
+      <!--- Ardes URL powrotu --->
+      <input type="hidden" name="url" value="http://www.demo.hopeIT.pl" />
+      <!-- Tekst przycisku powrotu do sklepu --->
+      <input type="hidden" name="buttontext" id="buttontext" value="Powrót do sprzedawcy" />
+    </p>
+
+    <!--------------------------------- KONIEC KONFIGURACJI --------------------------------------->
+
+    <p><br><button class="buttomDarowizna" id="buttomDarowizna">Wpłać darowiznę</button></p>
+  </form>
+  <div id="kwota_alert" style="color:red;"></div>
+</div>
+
+<!-----------------------------
+
+	Dolna część strony
+
+------------------------------------->
+
+</html>
